@@ -6,44 +6,56 @@ import java.util.ArrayList;
 
 public class FileManager {
 
-    public static void main(String[] args) throws IOException {
-        boolean salir = false;
-        do{
-            int menu = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la opcion que desea realizar " +
-                    "\n 1. Unir el archivo 1 y 2 " +
-                    "\n 2. Intersección entre 1 y 2 " +
-                    "\n 3. Archivo 1 - Archivo 2 " +
-                    "\n 4. Archivo 2 - Archivo 1"));
+    public static void main(String[] args) {
+        try{
+            boolean salir = false;
+            do{
+                int menu = Integer.parseInt(JOptionPane.showInputDialog("""
+                        Ingrese la opcion que desea realizar\s
+                         1. Unir el archivo 1 y 2\s
+                         2. Intersección entre 1 y 2\s
+                         3. Archivo 1 - Archivo 2\s
+                         4. Archivo 2 - Archivo 1\s
+                         5. Salir"""));
 
-            switch (menu){
-                case 1:
-                    merge();
-                    break;
-                case 2:
-                    intersection();
-                    break;
-                case 3:
-                    differenceBetween1And2();
-                    break;
-                case 4:
-                    differenceBetween2And1();
-                    break;
-            }
-        }while (!salir);
+                switch (menu) {
+                    case 1 -> {
+                        merge();
+                        JOptionPane.showMessageDialog(null, "Archivo resultado.txt creado exitosamente");
+                        salir = true;
+                    }
+                    case 2 -> {
+                        intersection();
+                        JOptionPane.showMessageDialog(null, "Archivo resultado.txt creado exitosamente");
+                        salir = true;
+                    }
+                    case 3 -> {
+                        differenceBetween1And2();
+                        JOptionPane.showMessageDialog(null, "Archivo resultado.txt creado exitosamente");
+                        salir = true;
+                    }
+                    case 4 -> {
+                        differenceBetween2And1();
+                        JOptionPane.showMessageDialog(null, "Archivo resultado.txt creado exitosamente");
+                        salir = true;
+                    }
+                    case 5 ->{
+                        JOptionPane.showMessageDialog(null, "Que tenga una feliz tarde :D");
+                        salir = true;
+                    }
+                }
+            }while (!salir);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public static void merge() throws IOException {
-        // PrintWriter object for file3.txt
-        PrintWriter pw = new PrintWriter("file3.txt");
-
-        // BufferedReader object for file1.txt
+        PrintWriter pw = new PrintWriter("archivo.txt");
         BufferedReader br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo1.txt"));
 
         String line = br.readLine();
 
-        // loop to copy each line of
-        // file1.txt to  file3.txt
-        while (line != null)
-        {
+        while (line != null) {
             pw.println(line);
             line = br.readLine();
         }
@@ -52,21 +64,15 @@ public class FileManager {
 
         line = br.readLine();
 
-        // loop to copy each line of
-        // file2.txt to  file3.txt
-        while(line != null)
-        {
+        while(line != null) {
             pw.println(line);
             line = br.readLine();
         }
 
         pw.flush();
-
-        // closing resources
         br.close();
         pw.close();
 
-        System.out.println("Merged file1.txt and file2.txt into file3.txt");
     }
 
     public static void intersection() throws IOException {
@@ -74,8 +80,7 @@ public class FileManager {
         ArrayList<String> archivo2 = new ArrayList<>();
         ArrayList<String> archivo3 = new ArrayList<>();
 
-        FileWriter writer = new FileWriter("file3.txt");
-//        PrintWriter pw = new PrintWriter("file3.txt");
+        FileWriter writer = new FileWriter("archivo.txt");
         BufferedReader br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo1.txt"));
 
         String line = br.readLine();
@@ -85,12 +90,10 @@ public class FileManager {
             archivo1.add(line);
         }
 
-        br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo2.txt"));
 
+        br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo2.txt"));
         line = br.readLine();
 
-        // loop to copy each line of
-        // file2.txt to  file3.txt
         while(line != null) {
             line = br.readLine();
             archivo2.add(line);
@@ -107,10 +110,7 @@ public class FileManager {
             System.out.println(cadaLinea);
         }
         writer.close();
-
-        System.out.println("termino todo");
-
-
+        br.close();
     }
 
     public static void differenceBetween1And2() throws IOException {
@@ -118,8 +118,7 @@ public class FileManager {
         ArrayList<String> archivo2 = new ArrayList<>();
         ArrayList<String> archivo3 = new ArrayList<>();
 
-        FileWriter writer = new FileWriter("file3.txt");
-//        PrintWriter pw = new PrintWriter("file3.txt");
+        FileWriter writer = new FileWriter("archivo.txt");
         BufferedReader br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo1.txt"));
 
         String line = br.readLine();
@@ -130,11 +129,8 @@ public class FileManager {
         }
 
         br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo2.txt"));
-
         line = br.readLine();
 
-        // loop to copy each line of
-        // file2.txt to  file3.txt
         while(line != null) {
             line = br.readLine();
             archivo2.add(line);
@@ -151,8 +147,7 @@ public class FileManager {
             System.out.println(cadaLinea);
         }
         writer.close();
-
-        System.out.println("termino todo");
+        br.close();
     }
 
     public static void differenceBetween2And1() throws IOException {
@@ -160,8 +155,7 @@ public class FileManager {
         ArrayList<String> archivo2 = new ArrayList<>();
         ArrayList<String> archivo3 = new ArrayList<>();
 
-        FileWriter writer = new FileWriter("file3.txt");
-//        PrintWriter pw = new PrintWriter("file3.txt");
+        FileWriter writer = new FileWriter("archivo.txt");
         BufferedReader br = new BufferedReader(new FileReader("E:\\Projects\\Archivos\\archivo1.txt"));
 
         String line = br.readLine();
@@ -175,8 +169,6 @@ public class FileManager {
 
         line = br.readLine();
 
-        // loop to copy each line of
-        // file2.txt to  file3.txt
         while(line != null) {
             line = br.readLine();
             archivo2.add(line);
