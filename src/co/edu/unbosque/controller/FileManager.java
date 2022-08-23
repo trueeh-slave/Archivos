@@ -11,7 +11,7 @@ public class FileManager {
             boolean salir = false;
             do{
                 int menu = Integer.parseInt(JOptionPane.showInputDialog("""
-                        Ingrese la opcion que desea realizar\s
+                        Ingrese la opción que desea realizar\s
                          1. Unir el archivo 1 y 2\s
                          2. Intersección entre 1 y 2\s
                          3. Archivo 1 - Archivo 2\s
